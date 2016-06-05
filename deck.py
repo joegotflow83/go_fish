@@ -12,3 +12,10 @@ class Deck:
 
     def create_hand(self):
         return self.hand
+
+    def print_deck(self):
+        for card in self.deck:
+            print(card)
+
+
+deck = Deck()
