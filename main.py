@@ -20,12 +20,14 @@ class Game:
 
     def player_guess(self):
         """Allow player to guess a card"""
+        print('Here is your hand: \n{}'.format(self.player_hand))
         player_choice = input('Guess a card ')
         return player_choice
 
     def ai_guess(self):
         """Allow ai to guess a card"""
         ai_choice = random.sample(self.deck, 1)
+        print('The ai guesses a {}'.format(ai_choice))
         return ai_choice
 
     def ai_check_card(self, choice):
@@ -34,7 +36,9 @@ class Game:
             if choice == card:
                 self.player_hand.append(card)
                 self.ai_hand.remove(card)
-        return self.player_hand, self.ai_hand
+                return self.player_hand, self.ai_hand
+        else:
+            return "You did not guess a card in the AI's hand"
 
     def player_check_card(self, choice):
         """Check the players card if the card guessed is in their hand"""
@@ -42,7 +46,9 @@ class Game:
             if choice == card:
                 self.ai_hand.append(card)
                 self.player_hand.remove(card)
-        return self.player_hand, self.ai_hand
+                return self.player_hand, self.ai_hand
+        else:
+            return 'The ai did not guess a card in the players hand.'
 
     def add_player_match(self):
         """Add a match to the players score"""
@@ -79,15 +85,15 @@ class Game:
         """Play the game"""
         while self.player_matches < 3 or self.ai_matches < 3:
             player_guess = self.player_guess()
-            self.ai_check_card(player_guess)
+            print(self.ai_check_card(player_guess))
             self.check_suit(self.player_hand)
             ai_guess = self.ai_guess()
-            self.player_check_card(ai_guess)
+            print(self.player_check_card(ai_guess))
             self.check_suit(self.ai_hand)
         return 'Thanks for playing!'
 
 
 game = Game()
 print("Welcome to Go Fish! Try to beat the ai!")
-print("Here is your deck \n {}\n".format(game.player_hand))
+print(game.ai_hand)
 print(game.play())

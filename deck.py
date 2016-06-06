@@ -11,7 +11,7 @@ class Deck:
         self.hand = random.sample(self.deck, 7)
 
     def create_hand(self):
-        return self.hand
+        return random.sample(self.deck, 7)
 
     def print_deck(self):
         for card in self.deck:
